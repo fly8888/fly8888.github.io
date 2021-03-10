@@ -4,21 +4,17 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>OC Hook 相关记录 | ZFly的博客</title>
+  <title>Archives: 2021/3 | ZFly的博客</title>
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="获取OC 实现部分 IMP 通过method 去获取，这里只获取了实例方法的IMP12345678910#import &lt;objc&#x2F;runtime.h&gt;struct objc_method2&amp;#123;    SEL method_name      ; &#x2F;&#x2F; 方法名    char *method_types   ;    IMP method_imp       ; &#x2F;&#x2F; 方法实现">
-<meta property="og:type" content="article">
-<meta property="og:title" content="OC Hook 相关记录">
-<meta property="og:url" content="http://blog.zfly.network/2020/11/26/OC-Hook-%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ZFly的博客">
+<meta property="og:url" content="http://blog.zfly.network/archives/2021/03/index.html">
 <meta property="og:site_name" content="ZFly的博客">
-<meta property="og:description" content="获取OC 实现部分 IMP 通过method 去获取，这里只获取了实例方法的IMP12345678910#import &lt;objc&#x2F;runtime.h&gt;struct objc_method2&amp;#123;    SEL method_name      ; &#x2F;&#x2F; 方法名    char *method_types   ;    IMP method_imp       ; &#x2F;&#x2F; 方法实现">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-26T02:12:36.000Z">
-<meta property="article:modified_time" content="2020-11-26T02:21:04.096Z">
 <meta property="article:author" content="ZFly">
 <meta name="twitter:card" content="summary">
   
@@ -135,40 +131,55 @@
     <script>NProgress.set(0.4);</script>
     
     <main id="main" role="main">
-      <article id="post-OC-Hook-相关记录"
-  class="post article white-box article-type-post animated fade-in-top"
-  itemscope itemprop="blogPost">
-  <section class="post-header article-header">
-    <h2 class="title">
-        <a href="/2020/11/26/OC-Hook-%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/">
-          OC Hook 相关记录
+      
+	
+
+
+	<section class="page-header archive">
+    <h1>- <span>2021.3</span> -</h1>
+  </section>
+
+
+
+
+<section class="post-list">
+	
+    <article class="post   animated fade-in-top">
+
+  <section class="post-header">
+    
+      <h2 class="title">
+        <a href="/2021/03/10/iOS-%E7%AE%80%E4%B9%A6app%E5%8E%BB%E5%B9%BF%E5%91%8A/">
+          iOS 简书app去广告
         </a>
-    </h2>
+      </h2>
+      
       <div class="subtitle">
           <time>
-            Nov 26, 2020
+            Mar 10, 2021
           </time>
+          
+            <span class="tags">
+                 <span class="iconfont icon-tag"></span>
+                 <a class="tag-link" href="/tags/iOS/" rel="tag">iOS</a>
+              </span>
           
       </div>
   </section>
   <section class="content">
-    <div class="article-entry" itemprop="articleBody">
-      <h1 id="获取OC-实现部分-IMP"><a href="#获取OC-实现部分-IMP" class="headerlink" title="获取OC 实现部分 IMP"></a>获取OC 实现部分 IMP</h1><ul>
-<li>通过method 去获取，这里只获取了实例方法的IMP<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> objc_method2&#123;</span><br><span class="line">    SEL method_name      ; <span class="comment">// 方法名</span></span><br><span class="line">    <span class="keyword">char</span> *method_types   ;</span><br><span class="line">    IMP method_imp       ; <span class="comment">// 方法实现</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_method2 *Method2;</span><br><span class="line">    </span><br><span class="line">Method2 method = (Method2)class_getInstanceMethod(%c(SmCoreCollector),<span class="keyword">@selector</span>(collect));</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"--Method2--:%@---%s---%lu"</span>,<span class="built_in">NSStringFromSelector</span>(method-&gt;method_name),method-&gt;method_types,method-&gt;method_imp);</span><br></pre></td></tr></table></figure></li>
-<li>通过 class_getMethodImplementation 获取</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></span><br><span class="line">Class _<span class="keyword">class</span>, SEL message;</span><br><span class="line">IMP imp = class_getMethodImplementation(_<span class="keyword">class</span>, message);</span><br></pre></td></tr></table></figure>
+    简书App不错，但是广告太烦人，动手把广告屏蔽掉分析 简书 6.2.0由于广告是开屏弹出的，所以大致猜测在 application:didFinishLaunchingWithOptions: 中加载，找到代理类 HGAppDelegate...
 
-<h2 id="可以在此处替换IMP来过检测，但是是否会引发其它问题暂时不确定"><a href="#可以在此处替换IMP来过检测，但是是否会引发其它问题暂时不确定" class="headerlink" title="可以在此处替换IMP来过检测，但是是否会引发其它问题暂时不确定."></a>可以在此处替换IMP来过检测，但是是否会引发其它问题暂时不确定.</h2>
+    <div class="readmore">
+      <a href="/2021/03/10/iOS-%E7%AE%80%E4%B9%A6app%E5%8E%BB%E5%B9%BF%E5%91%8A/" class="iconfont icon-more">Read More</a>
     </div>
-  </section>
 
-  
-      
-    <section id="gitalk-container">
-    </section>
-  
+  </section>
 </article>
+  
+</section>
+
+
+
       <script>NProgress.set(0.6);</script>
     </main>
     
